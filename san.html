@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para el Amor de Mi Vida ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 15px;
+            transition: 0.3s;
+        }
+
+        #yes {
+            background-color: #ff0066;
+            color: white;
+        }
+
+        #yes:hover {
+            background-color: #ff3385;
+        }
+
+        #no {
+            background-color: white;
+            color: #ff0066;
+            position: absolute;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 30px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            position: fixed;
+            color: red;
+            animation: float 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+            }
+
+            to {
+                transform: translateY(-10vh);
+            }
+        }
+
+        /* 🌧️ Lluvia de imágenes */
+        .rain-img {
+            position: fixed;
+            top: -150px;
+            width: 120px;
+            border-radius: 15px;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Para Ti, Mi Amor ❤️</h1>
+        <h2>Desde que llegaste a mi vida todo es más bonito.</h2>
+        <h2>Hoy quiero preguntarte algo muy importante...</h2>
+
+        <h1>¿Quieres ser mi San Valentín? 💖</h1>
+
+        <div style="position:relative;">
+            <button id="yes">¡Sí! ❤️</button>
+            <button id="no">No 😢</button>
+        </div>
+
+        <!-- 🎵 Spotify -->
+        <div style="margin: 40px 0;">
+            <h2>Nuestra Canción 🎶</h2>
+            <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/4HP55OO4FlKQzM62buRyRI?si=4f46859e5cd94361" width="300"
+                height="380" frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- 📸 Galería -->
+    <h1>Nuestros Momentos 💕</h1>
+    <div class="gallery">
+        <img src="6.jpg">
+        <img src="40.jpeg">
+        <img src="45.jpeg">
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("no");
+        const yesBtn = document.getElementById("yes");
+
+        // Botón NO que huye
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+
+        // Botón SI
+        yesBtn.addEventListener("click", () => {
+
+            document.querySelector(".container").style.display = "none";
+
+            const images = [
+                "6.jpg",
+                "40.jpeg",
+                "45.jpeg"
+            ];
+
+            function createRain() {
+                const img = document.createElement("img");
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.classList.add("rain-img");
+
+                img.style.left = Math.random() * 100 + "vw";
+                img.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+                document.body.appendChild(img);
+
+                setTimeout(() => { img.remove(); }, 7000);
+            }
+
+            const message = document.createElement("div");
+            message.innerHTML = `
+        <div style="position:fixed;top:40%;width:100%;text-align:center;z-index:1000;">
+            <h1>💘 Sabía que dirías que sí, tamo mucho mvd hermosa y espero la pasemos muy bien hoy mvd hermosa 💘</h1>
+            <h2>Ahora eres oficialmente mi San Valentín ❤️</h2>
+        </div>
+    `;
+            document.body.appendChild(message);
+
+            setInterval(createRain, 300);
+        });
+
+        // 💕 Corazones flotando
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+
+</html>
